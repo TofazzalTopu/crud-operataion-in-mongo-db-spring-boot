@@ -1,0 +1,145 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org"
+>
+<body>
+<th:block th:fragment="sidebar">
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <!--<img th:src="@{'/uploads/'+ ${image}}" class="img-circle" lt="Admin Image"/>-->
+                </div>
+                <div class="pull-left info">
+                    <p th:text="${fullname}"></p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
+            <form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control"
+                           placeholder="Search..."> <span class="input-group-btn">
+							<button type="submit" name="search" id="search-btn"
+                                    class="btn btn-flat">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
+                </div>
+            </form>
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header">MAIN NAVIGATION</li>
+                <li th:if="${menulist.contains('/adminpanel/dashboard')}"><a
+                        th:href="@{/adminpanel/dashboard}"><i class="fa fa-dashboard"></i><span
+                        th:text="#{homepage.menu.dashboard}"></span></a></li>
+                <li class="treeview"
+                    th:if="${menulist.contains('/adminpanel/user/adduser')} or ${menulist.contains('/adminpanel/user/userlists')}">
+                    <a href="#"> <i class="fa fa-user-circle" aria-hidden="true"></i><span
+                            th:if="${nameSetup}" th:text="${nameSetup.getUserName()}"></span>
+                        <span class="pull-right-container"> <i
+                                class="fa fa-angle-left pull-right"></i>
+                         </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li th:if="${menulist.contains('/adminpanel/user/adduser')}"><a
+                                th:href="@{/adminpanel/user/adduser}"><i class="fa fa-edit"></i>
+                            <span th:if="${nameSetup}" th:text="'Add '+ ${nameSetup.getUserName()}"></span></a></li>
+                        <li th:if="${menulist.contains('/adminpanel/user/userlists')}"><a
+                                th:href="@{/adminpanel/user/userlists}"><i
+                                class="fa fa-table"></i><span th:if="${nameSetup}" th:text="${nameSetup.getUserName()} + ' List'"></span></a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview"
+                    th:if="${menulist.contains('/adminpanel/user/addCustomer')} or ${menulist.contains('/adminpanel/user/customerList')}">
+                    <a href="#"> <i class="fa fa-user-circle" aria-hidden="true"></i>
+                        <span  th:if="${nameSetup}" th:text="${nameSetup.getCustomerName()}"></span>
+                        <!--<span th:text="#{homepage.menu.customer}"></span>-->
+                        <span class="pull-right-container"> <i
+                                class="fa fa-angle-left pull-right"></i>
+                         </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li th:if="${menulist.contains('/adminpanel/user/addCustomer')}"><a
+                                th:href="@{/adminpanel/user/addCustomer}"><i class="fa fa-edit"></i>
+                            <span th:if="${nameSetup}" th:text="'Add '+ ${nameSetup.getCustomerName()}"></span></a></li>
+                        <li th:if="${menulist.contains('/adminpanel/user/customerList')}"><a
+                                th:href="@{/adminpanel/user/customerList}"><i
+                                class="fa fa-table"></i><span th:if="${nameSetup}" th:text="${nameSetup.getCustomerName()} + ' List'"></span></a></li>
+                                <!--class="fa fa-table"></i><span th:text="#{homepage.menu.user.customerList}"></span></a></li>-->
+                    </ul>
+                </li>
+
+                <li class="treeview"
+                    th:if="${menulist.contains('/company/registration')} or ${menulist.contains('/company/companyLists')}">
+                    <a href="#"> <i class="fa fa-user-circle" aria-hidden="true"></i><span
+                            th:text="#{homepage.menu.company}"></span>
+                        <span class="pull-right-container"> <i class="fa fa-angle-left pull-right"></i>
+                         </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        <li th:if="${menulist.contains('/company/viewDetails')}"><a
+                                th:href="@{/company/viewDetails}"><i
+                                class="fa fa-table"></i><span th:text="#{homepage.menu.company.viewDetails}"></span></a></li>
+
+                    </ul>
+                </li>
+
+                <li class="treeview"
+                    th:if="${menulist.contains('/sessionOpLog/opLogForm')} or ${menulist.contains('/sessionPingInfo/pingInfoForm')}">
+                    <a href="#"> <i class="fa fa-superpowers" aria-hidden="true"></i><span
+                            th:text="#{homepage.menu.opLog}"></span>
+                        <span class="pull-right-container"> <i
+                                class="fa fa-angle-left pull-right"></i>
+						</span>
+                    </a>
+
+                    <ul class="treeview-menu">
+                        <li th:if="${menulist.contains('/sessionOpLog/opLogForm')}"><a
+                                th:href="@{/sessionOpLog/opLogForm}"><i
+                                class="fa fa-table"></i><span th:text="#{homepage.menu.opLog.list}"></span></a></li>
+
+                        <li th:if="${menulist.contains('/sessionPingInfo/pingInfoForm')}"><a
+                                th:href="@{/sessionPingInfo/pingInfoForm}"><i
+                                class="fa fa-table"></i><span th:text="#{homepage.menu.sessionPingInfo.list}"></span></a></li>
+                    </ul>
+                </li>
+                <li class="treeview"
+                    th:if="${menulist.contains('/nameSetup/showName')}">
+                    <a href="#"> <i class="fa fa-superpowers" aria-hidden="true"></i><span
+                            th:text="#{homepage.menu.settings}"></span>
+                        <span class="pull-right-container"> <i
+                                class="fa fa-angle-left pull-right"></i>
+						</span>
+                    </a>
+
+                    <ul class="treeview-menu">
+                        <li th:if="${menulist.contains('/nameSetup/showName')}"><a
+                                th:href="@{/nameSetup/showName}"><i
+                                class="fa fa-table"></i><span th:text="#{homepage.menu.settings.name.setup}"></span></a></li>
+                    </ul>
+                </li>
+
+                <li class="treeview"
+                    th:if="${menulist.contains('/adminpanel/casbin/addcasbin')} or ${menulist.contains('/adminpanel/casbin/casbinlists')}">
+                    <a href="#"> <i class="fa fa-superpowers" aria-hidden="true"></i><span
+                            th:text="#{homepage.menu.role}"></span>
+                        <span class="pull-right-container"> <i
+                                class="fa fa-angle-left pull-right"></i>
+						</span>
+                    </a>
+
+                    <ul class="treeview-menu">
+                        <li th:if="${menulist.contains('/adminpanel/casbin/addcasbin')}">
+                            <a
+                                th:href="@{/adminpanel/casbin/addcasbin}"><i
+                                class="fa fa-edit"></i><span th:text="#{homepage.menu.role.addRole}"></span></a></li>
+                        <li><a
+                                th:href="@{/adminpanel/casbin/casbinlists}"><i
+                                class="fa fa-table"></i><span th:text="#{homepage.menu.role.roleList}"></span></a></li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+    </aside>
+</th:block>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title> Create Tutorials </title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>Tutorials Form -Create Tutorials</h2>
+    <p> Note: In This form data will be encrypted during save.</p>
+    <form id="app" role="form" th:action="@{/create}" th:object="${tutorial}"
+          method="post">
+        <div class="box-body">
+            <label style="padding-left: 30%; color: red; align-content: center;" th:if="${error}" th:text="${error}"/>
+            <label style="padding-left: 30%; color: green; align-content: center;" th:if="${success}" th:text="${success}"/>
+
+            <div class="form-group">
+                <label for="title">Title</label>:
+                <input required type="text" th:field="*{title}" id="title" name="title"  minlength="2" maxlength="50" class="form-control is-valid"
+                       autofocus="autofocus" placeholder="Enter title ">
+                <label th:if="${#fields.hasErrors('title')}" th:errors="*{title}"
+                       th:class="'error text-danger'"> Title </label>
+            </div>
+
+
+
+            <div class="form-group">
+                <label for="description">Description</label>:
+                <input required type="text" th:field="*{description}" th:id="description" maxlength="100" name="description"
+                       class="form-control" autofocus="autofocus"
+                       placeholder="Enter description">
+                <label th:if="${#fields.hasErrors('description')}" th:errors="*{description}"
+                       th:class="'error'">Description</label>
+            </div>
+
+
+        </div>
+        <div class="box-footer">
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tutorials List</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#logTable').DataTable({
+                "scrollX": true,
+                "order": [
+                    [0, "asc"]
+                ]
+                // ,"scrollY": 400,
+            });
+            $('.dataTables_length').addClass('bs-select');
+        });
+    </script>
+
+</head>
+<body>
+
+<div class="container">
+    <h2>Tutorials Table -Tutorials List</h2>
+    <p> Note: This table shows data those ware encrypted during save and decrypted during display:</p>
+    <div class="box">
+        <div class="box-body">
+            <table id="logTable"
+                   class="table table-striped table-bordered table-hover table-sm table-responsive"
+                   cellspacing="0" width="100%">
+                <!--<caption class="info"> Tutorials List</caption>-->
+                <thead>
+
+                <tr>
+                    <th hidden style="max-width: 5%; word-break:break-all; padding-left: 0%; padding-right: 0%"
+                        th:text="ID">
+                    </th>
+                    <th style="max-width: 10%; word-break:break-all; padding-left: 0%; padding-right: 0%"
+                        th:text="Serial">
+                    </th>
+                    <th style="text-align: center; max-width: 10%; word-break:break-all; padding-left: 0%; padding-right: 0%"
+                        th:text="Title">
+                    </th>
+                    <th style="text-align: center; max-width: 10%; word-break:break-all; padding-left: 0%; padding-right: 0%"
+                        th:text="Description">
+                    </th>
+                    <th style="max-width: 10%; word-break:break-all; padding-left: 0%; padding-right: 0%"
+                        th:text="Published">
+                    </th>
+
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="tutorial, iter : ${tutorialList}">
+                    <td hidden style="max-width: 10%; word-break:break-all; padding-left: 0.5%; padding-right: 0.5%"
+                                                               th:text="${tutorial.getId()}"></td>
+                    <td style="text-align: center; max-width: 10%; word-break:break-all; padding-left: 0.5%; padding-right: 0.5%"
+                        th:text="${iter.count}"></td>
+                    <td style="max-width: 10%; word-break:break-all; padding-left: 0.5%; padding-right: 0.5%"
+                        th:text="${tutorial.getTitle()}"></td>
+                    <td style="max-width: 10%; word-break:break-all; padding-left: 0.5%; padding-right: 0.5%"
+                        th:text="${tutorial.getDescription()}"></td>
+                    <td style="max-width: 10%; word-break:break-all; padding-left: 0.5%; padding-right: 0.5%"
+                        th:if="${tutorial.isPublished()}"> Yes
+                    </td>
+                    <td style="max-width: 10%; word-break:break-all; padding-left: 0.5%; padding-right: 0.5%"
+                        th:unless="${tutorial.isPublished()}"> No
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
